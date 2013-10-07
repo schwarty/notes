@@ -7,10 +7,11 @@ from datetime import datetime
 
 import shutil
 
+pwd = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(pwd, 'externals')
+
 from externals import tempita
 from externals import markdown
-
-pwd = os.path.dirname(os.path.abspath(__file__))
 
 
 def make_log(reports_dir, title):
