@@ -964,26 +964,32 @@
     },
     viewerToAtlas: function(coords) {
       var matrix;
-
-      matrix = [[180, 0, 0, -90], [0, -218, 0, 90], [0, 0, -180, 108]];
+      // matrix = [[180, 0, 0, -90], [0, -218, 0, 90], [0, 0, -180, 108]];
+      // matrix = [[270.0, 0.0, 0.0, -135.0], [0.0, -327.0, 0.0,  135.0], [0.0, 0.0, -270.0, 162.0]]; 3 / 2
+      matrix = [[360 / 3.0, 0, 0, -180 / 3.0], [0, -436 / 3.0, 0, 180 / 3.0], [0, 0, -360 / 3.0, 216 / 3.0]];
       return this.transformCoordinates(coords, matrix);
     },
     atlasToViewer: function(coords) {
       var matrix;
-
-      matrix = [[1.0 / 180, 0, 0, 0.5], [0, -1.0 / 218, 0, 90.0 / 218], [0, 0, -1.0 / 180, 108.0 / 180]];
+      // matrix = [[1.0 / 180, 0, 0, 0.5], [0, -1.0 / 218, 0, 90.0 / 218], [0, 0, -1.0 / 180, 108.0 / 180]];
+      matrix = [[3.0 / 360, 0, 0, 3 / 4.0], [0, -3.0 / 436, 0, 270.0 / 436], [0, 0, -3.0 / 360, 324.0 / 360]];
+      // matrix = [[2.0 / 540, 0, 0, 1 / 3.0], [0, -2.0 / 654.0, 0, 180.0 / 654.0], [0, 0, -2.0 / 540, 216.0 / 540]]; 2 / 3
       return this.transformCoordinates(coords, matrix, false);
     },
     atlasToImage: function(coords) {
       var matrix;
 
-      matrix = [[-0.5, 0, 0, 45], [0, 0.5, 0, 63], [0, 0, 0.5, 36]];
+      // matrix = [[-0.5, 0, 0, 45], [0, 0.5, 0, 63], [0, 0, 0.5, 36]];
+      matrix = [[-1 / 3.0, 0, 0, 90 / 3.0], [0, 1 / 3.0, 0, 126 / 3.0], [0, 0, 1 / 3.0, 72 / 3.0]];
+      // matrix = [[- 3.0 / 4, 0, 0, 135.0 / 3], [0, 3.0 / 4, 0, 189 / 2.0], [0, 0, 3.0 / 4, 108 / 2.0]]; 3 / 2
       return this.transformCoordinates(coords, matrix);
     },
     imageToAtlas: function(coords) {
       var matrix;
 
-      matrix = [[-2, 0, 0, 90], [0, 2, 0, -126], [0, 0, 2, -72]];
+      // matrix = [[-2, 0, 0, 90], [0, 2, 0, -126], [0, 0, 2, -72]];
+      // matrix = [[-6 / 2.0, 0, 0, 270 / 2.0], [0, 6 / 2.0, 0, -378 / 2.0], [0, 0, 6 / 2.0, -216 / 2.0]];
+      matrix = [[-4 / 3.0, 0, 0, 180.0 / 3.0], [0, 4 / 3.0, 0, -252 / 3.0], [0, 0, 4.0 / 3, -144 / 3.0]]; 2 / 3
       return this.transformCoordinates(coords, matrix);
     }
   };
@@ -1414,7 +1420,8 @@
     View.prototype._snapToGrid = function(x, y) {
       var dims, xVoxSize, yVoxSize;
 
-      dims = [91, 109, 91];
+      // dims = [91, 109, 91];
+      dims = [53, 63, 46];
       dims.splice(this.dim, 1);
       xVoxSize = 1 / dims[0];
       yVoxSize = 1 / dims[1];

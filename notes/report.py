@@ -179,11 +179,15 @@ def parse_command_line():
     parser.add_option("-l", "--labels", dest="labels",
                       help=("labels for input dirs follwing this format: "
                             "input_dir1:label1 input_dir2:label2"), )
-    parser.add_option("-t", "--tarball",
+    parser.add_option("-z", "--tgz",
                       action="store_true", dest="tarball", default=False,
                       help="Create a tarball in addition of the directory.")
     parser.add_option("-m", "--message", dest="message",
                       help="Message as str or path to a markdown file.", )
+    # parser.add_option("-t", "--title", dest="title", default='Lab Notes'
+    #                   help="Title for report. Default to 'Lab Notes'", )
+    parser.add_option("-i", "--index", dest="index", action="store_true",
+                      default=False, help="Just index snapshots.", )
 
     (options, args) = parser.parse_args()
 
@@ -191,6 +195,11 @@ def parse_command_line():
 
     report_path = args[0]
     input_dirs = [d.rstrip('/') for d in args[1:]]
+
+    if options.index:
+        report_path, title = os.path.split(report_path)
+        make_log(report_path, title)
+        return
 
     if options.labels is None:
         labels = {}
